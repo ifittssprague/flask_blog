@@ -2,4 +2,12 @@
 
 {% block content %}
     <h1>{% block title %} Welcome to FlaskBlog {% endblock %}</h1>
+
+    {% for post in posts %}   <!-- Jinja for loop loops over each list item in posts-->
+        <a href="#">
+            <h2>{{ post['title'] }}</h2> <!-- displays each post in h2 heading. Post is a dictionary-like object-->
+        </a>
+        <span class="badge badge-primary">{{ post['created'] }}</span>
+        <hr>
+        {% endfor %} <!--Closing of the for loop -->
 {% endblock %}
