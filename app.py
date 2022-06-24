@@ -94,7 +94,7 @@ def edit(id):
         
         else:
             conn = get_db_connection()
-            conn.execute('UPDATE post set title = ?, content = ? where id = ?', (title, content, id))
+            conn.execute('UPDATE posts set title = ?, content = ? where id = ?', (title, content, id))
             conn.commit()
             conn.close()
 
@@ -102,4 +102,16 @@ def edit(id):
     
     # in the case of a get request, we render the edit.html template and pass in the post variable
     return render_template('edit.html', post = post)
-            
+
+# this function only accepts POST requests. So navigating to /id/delete in a browser will
+# return an error because browsers default to get requests
+@app.route('/<int:id>/delete', methods=('POST',))
+def delete(id):
+    post = get_post(id)
+    conn = get_db_connection()
+    conn.execute('delete from posts where id = ?', (id,))
+    conn.commit()
+    conn.close()
+    flash('"{}" was successfully deleted!'.format(post['title']))
+    return redirect(url_for('index'))
+

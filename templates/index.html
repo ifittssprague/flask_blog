@@ -10,6 +10,9 @@
             <h2>{{ post['title'] }}</h2> <!-- displays each post in h2 heading. Post is a dictionary-like object-->
         </a>
         <span class="badge badge-primary">{{ post['created'] }}</span>
+        <a href="{{ url_for('edit', id=post['id']) }}">
+            <span class="badge badge-warning">Edit</span>
+        </a>
         <hr>
         {% endfor %} <!--Closing of the for loop -->
 {% endblock %}
