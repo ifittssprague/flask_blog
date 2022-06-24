@@ -4,7 +4,9 @@
     <h1>{% block title %} Welcome to FlaskBlog {% endblock %}</h1>
 
     {% for post in posts %}   <!-- Jinja for loop loops over each list item in posts-->
-        <a href="#">
+        <!-- the href line defines the <h2> header as a button that links to the url from posts-->
+        <!-- What this does: when the  {{ post['title'] }} is hit, then the post function is called and post['id'] is passed to it-->
+        <a href="{{ url_for('post', post_id=post['id']) }}">
             <h2>{{ post['title'] }}</h2> <!-- displays each post in h2 heading. Post is a dictionary-like object-->
         </a>
         <span class="badge badge-primary">{{ post['created'] }}</span>
